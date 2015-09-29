@@ -27,3 +27,8 @@
 .fa_sticky_nav a.mainmenu:hover, .fa_sticky_nav a.mainmenu.fa_navactif {
   background-position:0 25px;
 }
+
+/* post offset fix */
+.post div[style*="-30px;"] {
+  top:-60px !important;
+}
