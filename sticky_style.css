@@ -1,0 +1,29 @@
+.fa_sticky_nav {
+  text-align:center;
+  background:#FAFAFA;
+  border-bottom:1px solid #CCC !important;
+  width:100%;
+  position:fixed;
+  z-index:999;
+  transition:200ms linear;
+}
+
+.fa_sticky_nav li {
+  font-size:0;
+  display:inline-block;
+}
+
+.fa_sticky_nav a.mainmenu {
+  color:#39C;
+  font:bold normal normal 12px/1 "Trebuchet MS" Arial, Verdana, Sans-serif;
+  background:url('http://i18.servimg.com/u/f18/18/45/41/65/nav10.png') repeat-x 0px 30px;
+  display:inline-block;
+  padding:0 10px;
+  height:30px;
+  line-height:30px;
+  transition:200ms;
+}
+
+.fa_sticky_nav a.mainmenu:hover, .fa_sticky_nav a.mainmenu.fa_navactif {
+  background-position:0 25px;
+}
