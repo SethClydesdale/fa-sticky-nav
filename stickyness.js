@@ -9,7 +9,7 @@
     visible : false, // sticky nav is visible
     
     // check the state of the static nav
-    checkState : function(cb) {
+    checkState : function() {
       if (!FA.Nav.animating) {
         var hidden = FA.Nav.barStatic.getBoundingClientRect().bottom <= FA.Nav.offset.bottom;
       
