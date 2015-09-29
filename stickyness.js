@@ -3,25 +3,29 @@
 
   FA.Nav = {
     
-    tbState : my_getcookie('toolbar_state'),
-    offset : {},
+    tbState : my_getcookie('toolbar_state'), // toolbar state
+    offset : {}, // sticky nav offsets
     
-    visible : true,
-    checkState : function() {
+    visible : false, // sticky nav is visible
+    
+    // check the state of the static nav
+    checkState : function(cb) {
       if (!FA.Nav.animating) {
-        var visible = FA.Nav.barStatic.getBoundingClientRect().bottom <= FA.Nav.offset.bottom;
+        var hidden = FA.Nav.barStatic.getBoundingClientRect().bottom <= FA.Nav.offset.bottom;
       
-        if (visible && FA.Nav.barSticky.style.top != FA.Nav.offset.top) {
+        if (hidden && FA.Nav.barSticky.style.top != FA.Nav.offset.top) {
           FA.Nav.barSticky.style.top = FA.Nav.offset.top;
           FA.Nav.visible = true;
-        } else if (!visible && FA.Nav.barSticky.style.top != '-30px') {
+        } else if (!hidden && FA.Nav.barSticky.style.top != '-30px') {
           FA.Nav.barSticky.style.top = '-30px';
           FA.Nav.visible = false;
         }
       }
     },
     
-    animating : false,
+    animating : false, // sticky nav is animating
+    
+    // animate the sticky nav when the toolbar is toggled
     animate : function() {
       if (FA.Nav.visible) {
         FA.Nav.animating = true;
@@ -39,23 +43,25 @@
     
   };
   
-  FA.Nav.offset = FA.Nav.tbState == 'hidden' ? { bottom : 0, top : '0px' } : { bottom : 30, top : '31px' };
-
+  // set default offsets based on toolbar state
+  FA.Nav.offset = FA.Nav.tbState == 'fa_hide' ? { bottom : 0, top : '0px' } : { bottom : 30, top : '31px' };
+  
   $(function() {
     var head = document.getElementById('page-header');
 
     if (head) {
-      FA.Nav.barStatic = head.lastChild.firstChild.firstChild.nextSibling;
+      FA.Nav.barStatic = head.lastChild.firstChild.firstChild.nextSibling; // static nav
       if (FA.Nav.barStatic) {
-        FA.Nav.barSticky = FA.Nav.barStatic.cloneNode(true);
-        FA.Nav.barSticky.className = 'fa_sticky_nav';
-        FA.Nav.barSticky.style.top = '-30px';
-        document.body.appendChild(FA.Nav.barSticky);
-
-        window.onscroll = FA.Nav.checkState;
-        FA.Nav.checkState();
-        
         $(function() {
+          FA.Nav.barSticky = FA.Nav.barStatic.cloneNode(true); // clone static nav
+          FA.Nav.barSticky.className = 'fa_sticky_nav';
+          FA.Nav.barSticky.style.top = '-30px';
+          document.body.appendChild(FA.Nav.barSticky); // append the sticky one
+          
+          window.onscroll = FA.Nav.checkState; // check state on scroll
+          FA.Nav.checkState(); // startup check
+          
+          // toolbar toggling
           $('#fa_hide').click(function() {
             FA.Nav.offset = { bottom : 0, top : '0px' };
             FA.Nav.animate();
