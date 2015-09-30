@@ -1,6 +1,6 @@
 # FA Sticky Nav
 
-This is a sticky navigation developed for the support forums of forumactif, but can be used by others as well. The current setup is for version phpbb3, so you will need to make modifications for other forum versions. I'll most likely update this later on.
+This is a sticky navigation developed for the support forums of forumactif, but can be used by others as well. The current setup is for version phpbb3, but the target node can be changed for each version.
 
 ## Installing
 
@@ -14,5 +14,16 @@ Anyway, to install this plugin go to your Admin Panel, then Modules > JS codes m
 **Placement :** In all the pages
 
 Then paste the [raw source](https://raw.githubusercontent.com/SethClydesdale/fa-sticky-nav/master/stickyness.js) into the textarea and submit.
+
+Depending on your forum version replace ``#page-header .navlinks`` in ``targetNode`` by one of the following selector sets.
+
+**PHPBB2 :** ``.bodyline > table + table`` 
+
+**PHPBB3 :** Leave it as is.
+
+**PUNBB :** ``#pun-navlinks``
+
+**INVISION :** ``#submenu``
+
 
 So it has the correct style, you need to install the CSS via Display > Colors > CSS stylesheet. The CSS can be found [here](https://raw.githubusercontent.com/SethClydesdale/fa-sticky-nav/master/sticky_style.css).
