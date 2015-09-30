@@ -15,6 +15,13 @@ Anyway, to install this plugin go to your Admin Panel, then Modules > JS codes m
 
 Then paste the [raw source](https://raw.githubusercontent.com/SethClydesdale/fa-sticky-nav/master/stickyness.js) into the textarea and submit.
 
+So it has the correct style, you need to install the CSS via Display > Colors > CSS stylesheet. The CSS can be found [here](https://raw.githubusercontent.com/SethClydesdale/fa-sticky-nav/master/sticky_style.css).
+
+
+## stickyness.js modifications
+
+#### Forum Version
+
 Depending on your forum version replace ``#page-header .navlinks`` in ``targetNode`` by one of the following selector sets.
 
 **PHPBB2 :** ``.bodyline > table + table`` 
@@ -25,5 +32,16 @@ Depending on your forum version replace ``#page-header .navlinks`` in ``targetNo
 
 **INVISION :** ``#submenu``
 
+#### Injecting Custom Navigation Items
 
-So it has the correct style, you need to install the CSS via Display > Colors > CSS stylesheet. The CSS can be found [here](https://raw.githubusercontent.com/SethClydesdale/fa-sticky-nav/master/sticky_style.css).
+To insert custom navigation items find this assignment :
+```javascript
+FA.Nav.barSticky = FA.Nav.barStatic.cloneNode(true);
+```
+
+and add the following after it :
+```javascript
+FA.Nav.barSticky.insertAdjacentHTML('afterbegin', '<li><a href="#top" class="mainmenu">Top</a></li>');
+```
+
+Doing this will allow you to insert adjacent HTML before or after the navigation links. For more information I recommend you read the documentation for [insertAdjacentHTML()](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML).
