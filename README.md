@@ -5,7 +5,7 @@ This is a sticky navigation developed for the support forums of forumactif, but 
 ## Installing
 
 If you don't know what a sticky nav is, it's a navbar that sticks to the top of the screen when the static navbar is scrolled out of view. It makes navigating websites a whole lot easier. A small example :
-![preview](http://i21.servimg.com/u/f21/18/21/41/30/captur76.png)
+![preview](http://i21.servimg.com/u/f21/18/21/41/30/captur78.png)
 
 Anyway, to install this plugin go to your Admin Panel, then Modules > JS codes management and create a new script with the following settings.
 
