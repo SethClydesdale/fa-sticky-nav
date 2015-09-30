@@ -26,13 +26,13 @@ The modifications below are instructions intended for the [stickyness.js](https:
 
 Depending on your forum version replace ``#page-header .navlinks`` in ``targetNode`` by one of the following selector sets.
 
-**PHPBB2 :** ``.bodyline > table + table`` 
+**phpbb2 :** ``.bodyline > table + table`` 
 
-**PHPBB3 :** Leave it as is.
+**phpbb3 :** Leave it as is.
 
-**PUNBB :** ``#pun-navlinks``
+**punbb :** ``#pun-navlinks``
 
-**INVISION :** ``#submenu``
+**invision :** ``#submenu``
 
 #### Injecting Custom Navigation Items
 
