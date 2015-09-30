@@ -20,6 +20,8 @@ So it has the correct style, you need to install the CSS via Display > Colors > 
 
 ## Modifications
 
+The modifications below are instructions intended for the [stickyness.js](https://github.com/SethClydesdale/fa-sticky-nav/blob/master/stickyness.js) script.
+
 #### Forum Version
 
 Depending on your forum version replace ``#page-header .navlinks`` in ``targetNode`` by one of the following selector sets.
