@@ -1,5 +1,6 @@
 /* sticky nav main */
 #fa_sticky_nav {
+  font-size:0; /* hide whitespace */
   text-align:center;
   background:#FAFAFA;
   border-bottom:1px solid #CCC !important;
@@ -11,10 +12,7 @@
   transition:top 200ms linear, width 600ms ease-in-out;
 }
 
-#fa_sticky_nav li {
-  font-size:0;
-  display:inline;
-}
+#fa_sticky_nav li { display:inline } /* navlist adjustment */
 
 
 /* sticky menu links */
