@@ -3,13 +3,20 @@
 
   FA.Nav = {
     
+    targetNode : '#page-header .navlinks', // node to be cloned into a sticky nav
+    // TARGET NODES BY VERSION
+    // PHPBB2   : .bodyline > table + table
+    // PHPBB3   : #page-header .navlinks
+    // PUNBB    : #pun-navlinks
+    // INVISION : #submenu
+    
     collapsible : true, // show hide button ?
     
     // offset states
     offsets : {
       tbVisible : {
         bottom : 30,
-        top : '31px'
+        top : '31px' // change to 30px if there's no border on your toolbar
       },
       
       tbHidden : {
@@ -75,45 +82,42 @@
   FA.Nav.activeOffset = my_getcookie('toolbar_state') == 'fa_hide' ? FA.Nav.offsets.tbHidden : FA.Nav.offsets.tbVisible;
   
   $(function() {
-    var head = document.getElementById('page-header');
-
-    if (head) {
-      FA.Nav.barStatic = head.lastChild.firstChild.firstChild.nextSibling; // static nav
-      if (FA.Nav.barStatic) {
-        $(function() {
-          FA.Nav.barSticky = FA.Nav.barStatic.cloneNode(true); // clone static nav
-          FA.Nav.barSticky.id = 'fa_sticky_nav';
-          FA.Nav.barSticky.style.width = my_getcookie('fa_sticky_nav') == 'hidden' ? '0%' : '100%';
-          FA.Nav.barSticky.style.top = '-30px';
+    FA.Nav.barStatic = document.querySelector ? document.querySelector(FA.Nav.targetNode) : $(FA.Nav.targetNode)[0]; // static nav
+    
+    if (FA.Nav.barStatic) {
+      $(function() {
+        FA.Nav.barSticky = FA.Nav.barStatic.cloneNode(true); // clone static nav
+        FA.Nav.barSticky.id = 'fa_sticky_nav';
+        FA.Nav.barSticky.style.width = my_getcookie('fa_sticky_nav') == 'hidden' ? '0%' : '100%';
+        FA.Nav.barSticky.style.top = '-30px';
           
-          document.body.appendChild(FA.Nav.barSticky); // append the sticky one
+        document.body.appendChild(FA.Nav.barSticky); // append the sticky one
           
-          // sticky nav toggler
-          if (FA.Nav.collapsible) {
-            FA.Nav.toggler = document.createElement('A');
-            FA.Nav.toggler.id = 'fa_sticky_toggle';
-            FA.Nav.toggler.href = '#';
-            FA.Nav.toggler.style.top = '-30px';
-            FA.Nav.toggler.onclick = FA.Nav.toggle;
-            
-            document.body.appendChild(FA.Nav.toggler);
-          };
+        // sticky nav toggler
+        if (FA.Nav.collapsible) {
+          FA.Nav.toggler = document.createElement('A');
+          FA.Nav.toggler.id = 'fa_sticky_toggle';
+          FA.Nav.toggler.href = '#';
+          FA.Nav.toggler.style.top = '-30px';
+          FA.Nav.toggler.onclick = FA.Nav.toggle;
           
-          window.onscroll = FA.Nav.checkState; // check state on scroll
-          FA.Nav.checkState(); // startup check
+          document.body.appendChild(FA.Nav.toggler);
+        };
+        
+        window.onscroll = FA.Nav.checkState; // check state on scroll
+        FA.Nav.checkState(); // startup check
           
-          // animate sticky nav and change offsets when the toolbar is toggled
-          $('#fa_hide').click(function() {
-            FA.Nav.activeOffset = FA.Nav.offsets.tbHidden;
-            FA.Nav.animate();
-          });
-          
-          $('#fa_show').click(function() {
-            FA.Nav.activeOffset = FA.Nav.offsets.tbVisible;
-            FA.Nav.animate();
-          });
+        // animate sticky nav and change offsets when the toolbar is toggled
+        $('#fa_hide').click(function() {
+          FA.Nav.activeOffset = FA.Nav.offsets.tbHidden;
+          FA.Nav.animate();
         });
-      }
+        
+        $('#fa_show').click(function() {
+          FA.Nav.activeOffset = FA.Nav.offsets.tbVisible;
+          FA.Nav.animate();
+        });
+      });
     }
   });
 }());
