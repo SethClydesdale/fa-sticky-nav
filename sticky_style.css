@@ -1,19 +1,24 @@
-.fa_sticky_nav {
+/* sticky nav main */
+#fa_sticky_nav {
   text-align:center;
   background:#FAFAFA;
   border-bottom:1px solid #CCC !important;
-  width:100%;
+  height:30px;
   position:fixed;
+  right:0;
   z-index:999;
-  transition:200ms linear;
+  overflow:hidden;
+  transition:top 200ms linear, width 600ms ease-in-out;
 }
 
-.fa_sticky_nav li {
+#fa_sticky_nav li {
   font-size:0;
-  display:inline-block;
+  display:inline;
 }
 
-.fa_sticky_nav a.mainmenu {
+
+/* sticky menu links */
+#fa_sticky_nav a.mainmenu {
   color:#39C;
   font-size:12px;
   font-weight:bold;
@@ -26,9 +31,35 @@
   transition:200ms;
 }
 
-.fa_sticky_nav a.mainmenu:hover, .fa_sticky_nav a.mainmenu.fa_navactif {
+#fa_sticky_nav a.mainmenu:hover, #fa_sticky_nav a.mainmenu.fa_navactif {
   background-position:0 25px;
 }
+
+
+/* sticky nav toggler */
+#fa_sticky_toggle {
+  background:url('http://i21.servimg.com/u/f21/18/21/41/30/omni10.png') no-repeat 0 0 #FAFAFA;
+  border:1px solid #CCC;
+  border-right:none;
+  display:inline-block;
+  height:30px;
+  width:30px;
+  position:fixed;
+  right:0;
+  z-index:999;
+  transition:top 200ms linear;
+}
+
+#fa_sticky_toggle:hover { background-position:-30px 0 }
+
+
+/* make hidden toolbar similar to toggler */
+#fa_toolbar_hidden {
+  border-radius:0 !important;
+  border:1px solid #CCC;
+  border-right:0;
+}
+
 
 /* post offset fix */
 .post div[style*="-30px;"] {
