@@ -18,7 +18,7 @@ Then paste the [raw source](https://raw.githubusercontent.com/SethClydesdale/fa-
 So it has the correct style, you need to install the CSS via Display > Colors > CSS stylesheet. The CSS can be found [here](https://raw.githubusercontent.com/SethClydesdale/fa-sticky-nav/master/sticky_style.css).
 
 
-## stickyness.js modifications
+## Modifications
 
 #### Forum Version
 
