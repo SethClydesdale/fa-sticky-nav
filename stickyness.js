@@ -5,18 +5,31 @@
     
     collapsible : true, // show hide button ?
     
-    offset : {}, // sticky nav offsets
+    // offset states
+    offsets : {
+      tbVisible : {
+        bottom : 30,
+        top : '31px'
+      },
+      
+      tbHidden : {
+        bottom : 0,
+        top : '0px'
+      }
+    },
+    
+    activeOffset : {}, // active offset for the sticky nav
     
     visible : false, // sticky nav is visible
     
     // check the state of the static nav
     checkState : function() {
       if (!FA.Nav.animating) {
-        var hidden = FA.Nav.barStatic.getBoundingClientRect().bottom <= FA.Nav.offset.bottom;
+        var hidden = FA.Nav.barStatic.getBoundingClientRect().bottom <= FA.Nav.activeOffset.bottom;
       
-        if (hidden && FA.Nav.barSticky.style.top != FA.Nav.offset.top) {
+        if (hidden && FA.Nav.barSticky.style.top != FA.Nav.activeOffset.top) {
           if (FA.Nav.toggler) FA.Nav.toggler.style.top = '30px';
-          FA.Nav.barSticky.style.top = FA.Nav.offset.top;
+          FA.Nav.barSticky.style.top = FA.Nav.activeOffset.top;
           FA.Nav.visible = true;
         } else if (!hidden && FA.Nav.barSticky.style.top != '-30px') {
           if (FA.Nav.toggler) FA.Nav.toggler.style.top = '-30px';
@@ -35,7 +48,7 @@
         FA.Nav.barSticky.style.transition = 'none';
       
         $(FA.Nav.barSticky).animate({
-          top : FA.Nav.offset.top
+          top : FA.Nav.activeOffset.top
         }, function() {
           FA.Nav.barSticky.style.transition = '';
           FA.Nav.animating = false;
@@ -59,7 +72,7 @@
   };
   
   // set default offsets based on toolbar state
-  FA.Nav.offset = my_getcookie('toolbar_state') == 'fa_hide' ? { bottom : 0, top : '0px' } : { bottom : 30, top : '31px' };
+  FA.Nav.activeOffset = my_getcookie('toolbar_state') == 'fa_hide' ? FA.Nav.offsets.tbHidden : FA.Nav.offsets.tbVisible;
   
   $(function() {
     var head = document.getElementById('page-header');
@@ -89,14 +102,14 @@
           window.onscroll = FA.Nav.checkState; // check state on scroll
           FA.Nav.checkState(); // startup check
           
-          // toolbar toggling
+          // animate sticky nav and change offsets when the toolbar is toggled
           $('#fa_hide').click(function() {
-            FA.Nav.offset = { bottom : 0, top : '0px' };
+            FA.Nav.activeOffset = FA.Nav.offsets.tbHidden;
             FA.Nav.animate();
           });
           
           $('#fa_show').click(function() {
-            FA.Nav.offset = { bottom : 30, top : '31px' };
+            FA.Nav.activeOffset = FA.Nav.offsets.tbVisible;
             FA.Nav.animate();
           });
         });
