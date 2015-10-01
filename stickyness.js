@@ -22,7 +22,9 @@
       tbHidden : {
         bottom : 0,
         top : '0px'
-      }
+      },
+      
+      toggler : '30px'
     },
     
     activeOffset : {}, // active offset for the sticky nav
@@ -35,7 +37,7 @@
         var hidden = FA.Nav.barStatic.getBoundingClientRect().bottom <= FA.Nav.activeOffset.bottom;
       
         if (hidden && FA.Nav.barSticky.style.top != FA.Nav.activeOffset.top) {
-          if (FA.Nav.toggler) FA.Nav.toggler.style.top = '30px';
+          if (FA.Nav.toggler) FA.Nav.toggler.style.top = FA.Nav.offsets.toggler;
           FA.Nav.barSticky.style.top = FA.Nav.activeOffset.top;
           FA.Nav.visible = true;
         } else if (!hidden && FA.Nav.barSticky.style.top != '-30px') {
@@ -78,10 +80,12 @@
     
   };
   
-  // set default offsets based on toolbar state
-  FA.Nav.activeOffset = my_getcookie('toolbar_state') == 'fa_hide' ? FA.Nav.offsets.tbHidden : FA.Nav.offsets.tbVisible;
-  
   $(function() {
+    // set default offsets based on toolbar state
+    FA.Nav.activeOffset = (my_getcookie('toolbar_state') == 'fa_hide' || !_userdata.activate_toolbar) ? FA.Nav.offsets.tbHidden : FA.Nav.offsets.tbVisible;
+    if (!_userdata.activate_toolbar) FA.Nav.offsets.toggler = '0px';
+    
+    // find the static nav
     FA.Nav.barStatic = document.querySelector ? document.querySelector(FA.Nav.targetNode) : $(FA.Nav.targetNode)[0]; // static nav
     
     if (FA.Nav.barStatic) {
