@@ -7,14 +7,18 @@
 
   FA.Nav = {
     
-    targetNode : '#page-header .navlinks', // node to be cloned into a sticky nav
     // TARGET NODES BY VERSION
     // PHPBB2   : .bodyline > table + table
     // PHPBB3   : #page-header .navlinks
     // PUNBB    : #pun-navlinks
     // INVISION : #submenu
+    targetNode : '#page-header .navlinks',
     
-    collapsible : true, // show hide button ?
+    customNav : '', // custom navlinks
+    
+    keepDefault : true, // keep the default navlinks
+    collapsible : true, // show hide button
+    
     
     // offset states
     offsets : {
@@ -94,7 +98,8 @@
     
     if (FA.Nav.barStatic) {
       $(function() {
-        FA.Nav.barSticky = FA.Nav.barStatic.cloneNode(true); // clone static nav
+        FA.Nav.barSticky = FA.Nav.barStatic.cloneNode(FA.Nav.keepDefault); // clone static nav
+        if (FA.Nav.customNav) FA.Nav.barSticky.insertAdjacentHTML('beforeEnd', FA.Nav.customNav);
         FA.Nav.barSticky.id = 'fa_sticky_nav';
         FA.Nav.barSticky.style.width = my_getcookie('fa_sticky_nav') == 'hidden' ? '0%' : '100%';
         FA.Nav.barSticky.style.top = '-30px';
