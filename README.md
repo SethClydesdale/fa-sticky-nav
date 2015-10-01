@@ -36,14 +36,9 @@ Depending on your forum version replace ``#page-header .navlinks`` in ``targetNo
 
 #### Injecting Custom Navigation Items
 
-To insert custom navigation items find this assignment :
+To insert custom navigation items find ``customNav``. This will allow you to insert a custom string of HTML to define, or redfine your navbar. The HTML inserted here is added to the end of the navigation. This is an example of top / bottom buttons :
 ```javascript
-FA.Nav.barSticky = FA.Nav.barStatic.cloneNode(true);
+customNav : '<a class="mainmenu" href="#top">Top</a><a class="mainmenu" href="#bottom">Bottom</a>',
 ```
 
-and add the following after it :
-```javascript
-FA.Nav.barSticky.insertAdjacentHTML('afterbegin', '<li><a href="#top" class="mainmenu">Top</a></li>');
-```
-
-Doing this will allow you to insert adjacent HTML before or after the navigation links. For more information I recommend you read the documentation for [insertAdjacentHTML()](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML).
+Make sure to include the ``mainmenu`` class as it's used for styling the navlinks.
