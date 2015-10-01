@@ -1,5 +1,9 @@
 (function() {
   if (!window.FA) window.FA = {};
+  if (FA.Nav) {
+    if (window.console && console.warn) console.warn('FA.Nav has already been defined');
+    return;
+  }
 
   FA.Nav = {
     
