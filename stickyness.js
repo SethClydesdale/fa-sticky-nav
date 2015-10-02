@@ -97,29 +97,30 @@
     FA.Nav.barStatic = document.querySelector ? document.querySelector(FA.Nav.targetNode) : $(FA.Nav.targetNode)[0]; // static nav
     
     if (FA.Nav.barStatic) {
-      $(function() {
-        FA.Nav.barSticky = FA.Nav.barStatic.cloneNode(FA.Nav.keepDefault); // clone static nav
-        if (FA.Nav.customNav) FA.Nav.barSticky.insertAdjacentHTML('beforeEnd', FA.Nav.customNav);
-        FA.Nav.barSticky.id = 'fa_sticky_nav';
-        FA.Nav.barSticky.style.width = my_getcookie('fa_sticky_nav') == 'hidden' ? '0%' : '100%';
-        FA.Nav.barSticky.style.top = '-30px';
+      FA.Nav.barSticky = FA.Nav.barStatic.cloneNode(FA.Nav.keepDefault); // clone static nav
+      if (FA.Nav.customNav) FA.Nav.barSticky.insertAdjacentHTML('beforeEnd', FA.Nav.customNav);
+      FA.Nav.barSticky.id = 'fa_sticky_nav';
+      FA.Nav.barSticky.style.width = my_getcookie('fa_sticky_nav') == 'hidden' ? '0%' : '100%';
+      FA.Nav.barSticky.style.top = '-30px';
           
-        document.body.appendChild(FA.Nav.barSticky); // append the sticky one
+      document.body.appendChild(FA.Nav.barSticky); // append the sticky one
           
-        // sticky nav toggler
-        if (FA.Nav.collapsible) {
-          FA.Nav.toggler = document.createElement('A');
-          FA.Nav.toggler.id = 'fa_sticky_toggle';
-          FA.Nav.toggler.href = '#';
-          FA.Nav.toggler.style.top = '-30px';
-          FA.Nav.toggler.onclick = FA.Nav.toggle;
+      // sticky nav toggler
+      if (FA.Nav.collapsible) {
+        FA.Nav.toggler = document.createElement('A');
+        FA.Nav.toggler.id = 'fa_sticky_toggle';
+        FA.Nav.toggler.href = '#';
+        FA.Nav.toggler.style.top = '-30px';
+        FA.Nav.toggler.onclick = FA.Nav.toggle;
           
-          document.body.appendChild(FA.Nav.toggler);
-        };
+        document.body.appendChild(FA.Nav.toggler);
+      };
         
-        window.onscroll = FA.Nav.checkState; // check state on scroll
-        FA.Nav.checkState(); // startup check
-          
+      window.onscroll = FA.Nav.checkState; // check state on scroll
+      FA.Nav.checkState(); // startup check
+      
+      // toolbar modifications
+      $(function() {
         // animate sticky nav and change offsets when the toolbar is toggled
         $('#fa_hide').click(function() {
           FA.Nav.activeOffset = FA.Nav.offsets.tbHidden;
